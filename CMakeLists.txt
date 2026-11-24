@@ -52,6 +52,9 @@ target_link_libraries(emas emawp)
 if(WIN32)
 target_link_libraries(emas ws2_32)
 endif(WIN32)
+if(APPLE)
+set_property(TARGET emas PROPERTY INSTALL_RPATH_USE_LINK_PATH TRUE)
+endif(APPLE)
 
 set(EMAS_ASM_INCLUDES_DIR ${CMAKE_INSTALL_PREFIX}/share/emas/include)
 
