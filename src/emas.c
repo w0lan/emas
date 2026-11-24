@@ -67,7 +67,15 @@ int parse_args(int argc, char **argv)
 	int val = 0;
 
 	int option;
+#ifdef __APPLE__
+	// macOS getopt() stops at the first non-option, getopt_long() permutes
+	static const struct option opts[] = {
+		{ NULL, 0, NULL, 0 },
+	};
+	while ((option = getopt_long(argc, argv,"I:D:c:O:vhdo:s:", opts, NULL)) != -1) {
+#else
 	while ((option = getopt(argc, argv,"I:D:c:O:vhdo:s:")) != -1) {
+#endif
 		switch (option) {
 			case 'c':
 				if (prog_cpu(optarg, CPU_FORCED)) {
