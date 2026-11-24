@@ -11,7 +11,7 @@ add_compile_options(-Wall)
 
 # ---- Target: emas parser/lexer -----------------------------------------
 
-find_package(BISON REQUIRED)
+find_package(BISON 3.0 REQUIRED)
 find_package(FLEX REQUIRED)
 
 bison_target(parser
