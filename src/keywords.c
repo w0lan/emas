@@ -25,8 +25,8 @@
 
 struct dh_table *keywords;
 
-#define PRAGMA_ADD(name, tok) if (dh_addv(keywords, name, tok, 0) < 0) return -1;
-#define OP_ADD(name, tok, opcode) if (dh_addv(keywords, name, tok, opcode) < 0) return -1;
+#define PRAGMA_ADD(name, tok) if (!dh_addv(keywords, name, tok, 0)) return -1;
+#define OP_ADD(name, tok, opcode) if (!dh_addv(keywords, name, tok, opcode)) return -1;
 
 // -----------------------------------------------------------------------
 int kw_init()
