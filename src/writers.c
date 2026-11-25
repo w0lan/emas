@@ -167,7 +167,7 @@ static void img_put(struct st *t)
 // -----------------------------------------------------------------------
 int writer_raw(struct st *prog, FILE *f)
 {
-	int res;
+	size_t res;
 	struct st *t;
 	int pos;
 
@@ -196,7 +196,7 @@ int writer_raw(struct st *prog, FILE *f)
 
 	if (icmax >= 0) {
 		res = fwrite(image, 2, icmax+1, f);
-		if (res < 0) {
+		if (res != (size_t) icmax+1) {
 			aaerror(NULL, "Write failed");
 			return 1;
 		}

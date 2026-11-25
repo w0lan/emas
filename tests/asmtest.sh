@@ -9,10 +9,10 @@ if [ -z "$1" ] ; then
 fi
 
 CURD=$(readlink -f .)
-EMAS=$(find $CURD -type f -executable -name emas -or -name emas.exe)
+EMAS=$(find $CURD -type f -perm -u+x \( -name emas -o -name emas.exe \))
 STABLE_EMAS=$(which emas)
 if [ -z "$EMAS" ] ; then
-	EMAS=$(find $CURD/.. -type f -executable -name emas -or -name emas.exe)
+	EMAS=$(find $CURD/.. -type f -perm -u+x \( -name emas -o -name emas.exe \))
 fi
 if [ -z "$EMAS" ] ; then
 	echo "emas binary not found in current or upper directory"
@@ -30,7 +30,7 @@ if [ -n "$STABLE_EMAS" ] ; then
 	echo "Testing against stable version using: $STABLE_EMAS"
 fi
 
-TESTDIRS=$(find $BASEDIR/functional -name '*.asm' -printf '%h\n' | sort -u)
+TESTDIRS=$(find $BASEDIR/functional -name '*.asm' -exec dirname {} \; | sort -u)
 if [ -z "$TESTDIRS" ] ; then
 	echo "No tests found in $BASEDIR/functional"
 	exit 1

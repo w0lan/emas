@@ -11,7 +11,7 @@ To build emas you need:
 
 * cmake
 * GNU make
-* bison and flex (together with development packages, which may be required on some systems)
+* bison (3.0 or newer) and flex (together with development packages, which may be required on some systems)
 
 Build instructions
 ==========================================================================
